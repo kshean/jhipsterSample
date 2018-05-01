@@ -1,0 +1,42 @@
+entity NetworkSource {
+	NetworkSource String
+}
+
+entity NetworkMetaData {
+	id UUID,
+	networkAnalysisId List,
+}
+
+entity Network {
+	id UUID,
+	networkMetadata NetworkMetaData,
+	language Language
+}
+
+entity NetworkAnalysis {
+	id UUID,
+    uri URI,
+    networkType NetworkType,
+    creation_time Instant
+}
+
+enum NetworkType {
+	TYPE1, TYPE2
+}
+
+relationship OneToOne {
+	Network{id} to NetworkMetaData
+}
+
+relationship OneToMany {
+	NetworkMetaData{id} to NetworkAnalysis
+}
+
+paginate Network with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with mySuffix
